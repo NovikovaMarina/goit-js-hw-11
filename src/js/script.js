@@ -1,7 +1,6 @@
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-// import { fetchImages } from './fetchImages';
 import { fetchImages } from './fetchImages';
 
 const searchForm = document.getElementById('search-form');
@@ -15,7 +14,6 @@ const perPage = 40;
 searchForm.addEventListener('submit', onSearchForm);
 
 function renderGallery(images) {
-  // Перевірка чи існує галерея перед вставкою даних
   if (!gallery) {
     return;
   }
@@ -50,7 +48,6 @@ function renderGallery(images) {
 
   gallery.insertAdjacentHTML('beforeend', markup);
 
-  // Цей код дозволяє автоматично прокручувати сторінку на висоту 2 карток галереї, коли вона завантажується
   const { height: cardHeight } = document
     .querySelector('.gallery')
     .firstElementChild.getBoundingClientRect();
@@ -120,20 +117,17 @@ function checkIfEndOfPage() {
   );
 }
 
-// Функція, яка виконуеться, якщо користувач дійшов до кінця сторінки
 function showLoadMorePage() {
   if (checkIfEndOfPage()) {
     onloadMore();
   }
 }
 
-// Додати подію на прокручування сторінки, яка викликає функцію showLoadMorePage
 window.addEventListener('scroll', showLoadMorePage);
 
 // кнопка “вгору”->
 arrowTop.onclick = function () {
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // після scrollTo відбудеться подія "scroll", тому стрілка автоматично сховається
 };
 
 window.addEventListener('scroll', function () {
