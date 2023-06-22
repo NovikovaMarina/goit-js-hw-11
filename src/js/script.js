@@ -89,7 +89,7 @@ function onSearchForm(e) {
     });
 }
 
-function onloadMore() {
+   function onloadMore() {
   page += 1;
   simpleLightBox.destroy();
   // simpleLightBox.refresh();
@@ -101,9 +101,10 @@ function onloadMore() {
 
       const totalPages = Math.ceil(data.totalHits / perPage);
 
-      if (page > totalPages) {
+      if (page > totalPages-1) {
+        window.removeEventListener('scroll', showLoadMorePage);
         Notiflix.Notify.failure(
-          "We're sorry, but you've reached the end of search results.",
+           "We're sorry, but you've reached the end of search results.",
         );
       }
     })
@@ -117,13 +118,14 @@ function checkIfEndOfPage() {
   );
 }
 
-function showLoadMorePage() {
+ function showLoadMorePage() {
   if (checkIfEndOfPage()) {
     onloadMore();
   }
 }
 
 window.addEventListener('scroll', showLoadMorePage);
+
 
 // кнопка “вгору”->
 arrowTop.onclick = function () {
